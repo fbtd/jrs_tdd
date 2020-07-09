@@ -10,6 +10,16 @@ FlickrFetcher = {
 			title: photoObj.title,
 			url:   FlickrFetcher.photoObjToURL(photoObj)
         };
+    },
+    fetchFlickrData: function(apiKey, fetcher) {
+        var url = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key='
+                  + apiKey + '&text=pugs&format=json&nojsoncallback=1';
+        return fetcher(url);
+    },
+    fetchPhotos: function (apiKey, fetcher) {
+        return FlickrFetcher.fetchFlickrData(apiKey, fetcher).then(function(data) {
+            return data.photos.photo.map(FlickrFetcher.transformPhotoObj);
+        });
     }
 };
 
