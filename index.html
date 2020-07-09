@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Flickr Kittens</title>
+  </head>
+  <body>
+    <div id="mydiv">
+
+    </div>
+  </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="flickr-fetcher.js"></script>
+  <script src="flickr-lister.js"></script>
+  <script>
+    FlickrFetcher.fetchPhotos('8060d4cdac3ceb86af470aae29af3a56')
+      .then(PhotoLister.photoListToHTML)
+      .then(function(photosHTML) {
+        PhotoLister.addPhotosToElement($, '#mydiv', photosHTML)
+      });
+  </script>
+</html>
